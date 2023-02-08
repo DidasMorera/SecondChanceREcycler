@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -42,6 +43,16 @@ public class HoldAndAdaptALunos extends RecyclerView.Adapter<HoldAndAdaptALunos.
         holder.nomeAlun.setText(alunoList.get(position).getNome());
         holder.teleAlu.setText(alunoList.get(position).getTelefone());
 
+        holder.delete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                alunoList.remove(holder.getAdapterPosition());
+                notifyItemRemoved(holder.getAdapterPosition());
+                notifyItemRangeChanged(holder.getAdapterPosition(), alunoList.size());
+            }
+        });
+
+
 
 
     }
@@ -55,12 +66,14 @@ public class HoldAndAdaptALunos extends RecyclerView.Adapter<HoldAndAdaptALunos.
     public class ViewHolder extends RecyclerView.ViewHolder{
         TextView nomeAlun;
         TextView teleAlu;
+        ImageView delete;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
 
             nomeAlun = itemView.findViewById(R.id.tv_nomeAl);
             teleAlu = itemView.findViewById(R.id.tv_telefone);
+            delete = itemView.findViewById(R.id.deletarr);
 
 
             itemView.setOnClickListener(new View.OnClickListener() {
@@ -90,6 +103,7 @@ public class HoldAndAdaptALunos extends RecyclerView.Adapter<HoldAndAdaptALunos.
 
                 }
             });
+
         }
     }
 
